@@ -2,13 +2,15 @@ import styled from "@emotion/styled"
 import { BUTTON, LOGO } from "../assets"
 import { Flex } from "flex-yeo"
 import { SnowEffect } from "../components"
+import { useNavigate } from "react-router-dom"
 
 export const Main = () => {
+  const navigate = useNavigate()
   return (
     <Back>
       <Flex isColumn gap={8} alignItems="center">
         <LogoImg src={LOGO} alt="logo" />
-        <BtnImg src={BUTTON} alt="button"/> 
+        <BtnImg onClick={() => navigate('/frame-select')} src={BUTTON} alt="button"/> 
       </Flex>
       <SnowEffect/>
     </Back>

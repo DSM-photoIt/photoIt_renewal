@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Main } from "./pages";
+import { ChristmasFrameSelectPage, FrameSelectPage, Main } from "./pages";
 import { AppLayout } from "./layouts";
+import { WinterSnackFrameSelectPage } from "./pages/WinterSnackFrameSelectPage";
 
 export const router = createBrowserRouter([
   {
@@ -10,6 +11,18 @@ export const router = createBrowserRouter([
       {
         path: '',
         element: <Main/>
+      },
+      {
+        path: '/frame-select',
+        element: <FrameSelectPage/>
+      },
+      {
+        path: '/christmas-frame',
+        element: <ChristmasFrameSelectPage/>
+      },
+      {
+        path: '/winter-snack-frame',
+        element: <WinterSnackFrameSelectPage/>
       }
     ]
   }
