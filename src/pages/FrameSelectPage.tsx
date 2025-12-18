@@ -1,7 +1,7 @@
 import { Flex } from "flex-yeo"
 import { SnowEffect } from "../components"
 import styled from "@emotion/styled"
-import { BREAD, HAT, SELECTBUTTON } from "../assets"
+import { BREAD, EXITBTN, HAT, SELECTBUTTON } from "../assets"
 import { useNavigate } from "react-router-dom"
 
 export const FrameSelectPage = () => {
@@ -9,6 +9,7 @@ export const FrameSelectPage = () => {
 
   return (
     <Flex justifyContent="center" alignItems="center" height="100vh">
+      <ExitBtn src={EXITBTN} onClick={() => navigate(-1)}/>
       <Flex alignItems="end" gap={60}>
         <Flex isColumn gap={12} alignItems="center">
           <Img src={BREAD} alt="붕어빵"/>
@@ -23,6 +24,17 @@ export const FrameSelectPage = () => {
     </Flex>
   )
 }
+const ExitBtn = styled.img `
+  cursor: pointer;
+  width: 100%;
+  max-width: 60px;
+  min-height: 20px;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+`
+
+
 
 
 const BtnImg = styled.img `
