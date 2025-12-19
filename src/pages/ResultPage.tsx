@@ -1,11 +1,10 @@
 import styled from "@emotion/styled"
-import { BREADFRAME, EXITBTN, PRINTBTN, RETURNBTN, RUDOLPHFRAME, SANTAFRAME, SHAREBTN, SWEETPOTATOFRAME } from "../assets"
+import { BREADFRAME, PRINTBTN, RETURNBTN, RUDOLPHFRAME, SANTAFRAME, SWEETPOTATOFRAME } from "../assets"
 import { Flex } from "flex-yeo"
 import { useNavigate, useParams } from "react-router-dom"
 import { useRef, useState, useEffect } from "react"
 import html2canvas from 'html2canvas'
 import { saveAs } from "file-saver"
-import { QRCodeCanvas } from "qrcode.react";
 
 
 const FRAME_IMAGES: Record<string, string> = {
@@ -19,7 +18,7 @@ export const ResultPage = () => {
   const {id} = useParams()
   const frameRef = useRef<HTMLDivElement>(null)
   const [imagesLoaded, setImagesLoaded] = useState(false)
-  const [isModal, setIsModal] = useState<boolean>(false)
+  // const [isModal, setIsModal] = useState<boolean>(false)
   const navigate = useNavigate()
 
   const frameImage = id ? FRAME_IMAGES[id] : null
@@ -133,28 +132,28 @@ export const ResultPage = () => {
   )
 }
 
-const ExitBtn = styled.img `
-  cursor: pointer;
-  width: 100%;
-  max-width: 60px;
-  min-height: 20px;
-  position: fixed;
-  top: 20px;
-  left: 20px;
-`
+// const ExitBtn = styled.img `
+//   cursor: pointer;
+//   width: 100%;
+//   max-width: 60px;
+//   min-height: 20px;
+//   position: fixed;
+//   top: 20px;
+//   left: 20px;
+// `
 
-const QRModal = styled.div `
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100vw;
-  height: 100vh;
-  background-color: #0000004f;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
+// const QRModal = styled.div `
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   z-index: 10;
+//   width: 100vw;
+//   height: 100vh;
+//   background-color: #0000004f;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `
 
 const FrameContent = styled.img`
   width: 165px;
