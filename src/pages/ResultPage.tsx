@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
-import { BREADFRAME, EXITBTN, PRINTBTN, RUDOLPHFRAME, SANTAFRAME, SHAREBTN, SWEETPOTATOFRAME } from "../assets"
+import { BREADFRAME, EXITBTN, PRINTBTN, RETURNBTN, RUDOLPHFRAME, SANTAFRAME, SHAREBTN, SWEETPOTATOFRAME } from "../assets"
 import { Flex } from "flex-yeo"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useRef, useState, useEffect } from "react"
 import html2canvas from 'html2canvas'
 import { saveAs } from "file-saver"
@@ -20,6 +20,7 @@ export const ResultPage = () => {
   const frameRef = useRef<HTMLDivElement>(null)
   const [imagesLoaded, setImagesLoaded] = useState(false)
   const [isModal, setIsModal] = useState<boolean>(false)
+  const navigate = useNavigate()
 
   const frameImage = id ? FRAME_IMAGES[id] : null
   const photos = localStorage.getItem("webcamPhotos")
@@ -114,7 +115,7 @@ export const ResultPage = () => {
               cursor: imagesLoaded ? 'pointer' : 'not-allowed'
             }}
           />
-          {/* <ShareBtn onClick={() => setIsModal(true)} src={SHAREBTN} alt="share"/> */}
+          <ShareBtn onClick={() => navigate("/")} src={RETURNBTN} alt="return"/>
         </Flex>
       </Flex>
       {/* {isModal && (
