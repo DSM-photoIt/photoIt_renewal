@@ -8,10 +8,15 @@ import {
   SANTAFRAMECONTENT,
   BREADFRAMECONTENT,
   CAMERABTN,
+  ONE,
+  TWO,
+  THREE,
+  FOUR,
 } from "../assets"
 
 type FrameKey = string
 
+const COUNT_IMAGES = [ONE, TWO, THREE, FOUR]
 const EMPTY_FRAMES = ["", "", "", ""]
 const TOTAL_SHOTS = 4
 
@@ -44,6 +49,8 @@ export const WebCamPage = () => {
   const [frameArray, setFrameArray] = useState<string[]>(EMPTY_FRAMES)
   const [shotIndex, setShotIndex] = useState(0)
   const [capturedImages, setCapturedImages] = useState<string[]>([])
+  const [isModal, setIsModal] = useState(false)
+  const [displayIndex, setDisplayIndex] = useState<number | null>(null)
 
   useEffect(() => {
     if (!id) {
@@ -54,8 +61,8 @@ export const WebCamPage = () => {
   }, [id])
 
   const handleCapture = () => {
-    if (capturedImages.length >= 4) {
-      navigate("/result")
+    if (capturedImages.length >= TOTAL_SHOTS) {
+      navigate(`/result/${id}`)
       return
     }
 
@@ -64,15 +71,21 @@ export const WebCamPage = () => {
     const imageSrc = webcamRef.current.getScreenshot()
     if (!imageSrc) return
 
+    setDisplayIndex(shotIndex)
+    setIsModal(true)
+
+    setTimeout(() => {
+      setIsModal(false)
+      setDisplayIndex(null)
+    }, 1500)
+
     const nextImages = [...capturedImages, imageSrc]
     setCapturedImages(nextImages)
-
     localStorage.setItem("webcamPhotos", JSON.stringify(nextImages))
 
     if (shotIndex < TOTAL_SHOTS - 1) {
       setShotIndex(prev => prev + 1)
     }
-    
   }
 
   return (
@@ -97,21 +110,41 @@ export const WebCamPage = () => {
             objectFit: "cover",
           }}
         />
-
         {frameArray[shotIndex] && (
           <FrameContent src={frameArray[shotIndex]} />
         )}
       </CameraStage>
 
-      <CameraBtn
-        src={CAMERABTN}
-        alt="카메라 버튼"
-        onClick={handleCapture}
-      />
+      <CameraBtn src={CAMERABTN} alt="camera" onClick={handleCapture} />
+
+      {isModal && displayIndex !== null && (
+        <ModalBack>
+          <Number
+            src={COUNT_IMAGES[displayIndex]}
+            alt={`count-${displayIndex + 1}`}
+          />
+        </ModalBack>
+      )}
     </Flex>
   )
 }
 
+const Number = styled.img`
+  width: 120px;
+`
+
+const ModalBack = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000043;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const CameraStage = styled.div`
   width: 900px;
