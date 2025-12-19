@@ -6,16 +6,28 @@ import { useNavigate } from "react-router-dom"
 
 export const Main = () => {
   const navigate = useNavigate()
+
+  const handleClick = () => {
+    const isMobile = window.innerWidth < 1024
+
+    if (isMobile) {
+      navigate("/mobile")
+    } else {
+      navigate("/frame-select")
+    }
+  }
+
   return (
     <Back>
       <Flex isColumn gap={8} alignItems="center">
         <LogoImg src={LOGO} alt="logo" />
-        <BtnImg onClick={() => navigate('/frame-select')} src={BUTTON} alt="button"/> 
+        <BtnImg onClick={handleClick} src={BUTTON} alt="button" />
       </Flex>
-      <SnowEffect/>
+      <SnowEffect />
     </Back>
   )
 }
+
 
 const BtnImg = styled.img `
   cursor: pointer;

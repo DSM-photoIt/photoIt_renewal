@@ -3,9 +3,9 @@ import { Global, css } from '@emotion/react';
 const style = css`
 
 @font-face {
-    font-family: 'NationalPension';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/NPSfontExtraBold.woff2') format('woff2');
-    font-weight: 100 800;
+    font-family: 'OngleipEoyeonce';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105@1.1/Uiyeun.woff') format('woff');
+    font-weight: normal;
     font-display: swap;
 }
 
@@ -16,7 +16,7 @@ const style = css`
     box-sizing: border-box;
     border: 0;
     font-style: normal;
-    font-family: 'NationalPension', sans-serif;
+    font-family: 'OngleipEoyeonce', sans-serif;
 
     -webkit-user-select: none;
     -moz-user-select: none;

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { ChristmasFrameSelectPage, FrameSelectPage, Main, ResultPage } from "./pages";
+import { ChristmasFrameSelectPage, FrameSelectPage, Main, MobilePage, ResultPage } from "./pages";
 import { AppLayout } from "./layouts";
 import { WinterSnackFrameSelectPage } from "./pages/WinterSnackFrameSelectPage";
 import { WebCamPage } from "./pages/WebCamPage";
@@ -32,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: '/result/:id',
         element: <ResultPage/>
+      },
+      {
+        path: '/mobile',
+        element: <MobilePage/>
       }
     ]
   }
