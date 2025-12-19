@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { Flex } from "flex-yeo"
 import { SnowEffect } from "../components"
-import { BREADFRAME, EXITBTN, SELECTBUTTON, SWEERPOTATOFRAME } from "../assets"
+import { BREADFRAMEIMG, EXITBTN, SELECTBUTTON, SWEETPOTATOFRAMEIMG } from "../assets"
 import { useNavigate } from "react-router-dom"
 
 export const WinterSnackFrameSelectPage = () => {
@@ -11,11 +11,11 @@ export const WinterSnackFrameSelectPage = () => {
       <ExitBtn src={EXITBTN} onClick={() => navigate(-1)}/>
       <Flex alignItems="end" gap={60}>
         <Flex isColumn gap={12} alignItems="center">
-          <Img src={SWEERPOTATOFRAME} alt="고구마"/>
+          <Img src={SWEETPOTATOFRAMEIMG} alt="고구마"/>
           <BtnImg onClick={() => navigate('/capture/sweetpotato1')} src={SELECTBUTTON} alt="셀렉트 버튼"/>
         </Flex>
         <Flex isColumn gap={12}>
-          <Img src={BREADFRAME} alt="붕어빵"/>
+          <Img src={BREADFRAMEIMG} alt="붕어빵"/>
           <BtnImg onClick={() => navigate('/capture/bread1')} src={SELECTBUTTON} alt="셀렉트 버튼"/>
         </Flex>
       </Flex>

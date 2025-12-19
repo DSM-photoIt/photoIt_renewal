@@ -27,7 +27,7 @@ export const Main = () => {
     </Back>
   )
 }
-
+ 
 
 const BtnImg = styled.img `
   cursor: pointer;

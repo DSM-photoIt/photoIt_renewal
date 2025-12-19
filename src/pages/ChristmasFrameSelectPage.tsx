@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import { Flex } from "flex-yeo"
 import { SnowEffect } from "../components"
-import { EXITBTN, RODOLPHFRAME, SELECTBUTTON, TREEFRAME } from "../assets"
+import { EXITBTN, RUDOLPHFRAMEIMG, SELECTBUTTON, TREEFRAME } from "../assets"
 import { useNavigate } from "react-router-dom"
 
 export const ChristmasFrameSelectPage = () => {
@@ -16,7 +16,7 @@ export const ChristmasFrameSelectPage = () => {
           <BtnImg onClick={() => navigate('/capture/santa1')} src={SELECTBUTTON} alt="셀렉트 버튼"/>
         </Flex>
         <Flex isColumn gap={12}>
-          <Img src={RODOLPHFRAME} alt="루돌프"/>
+          <Img src={RUDOLPHFRAMEIMG} alt="루돌프"/>
           <BtnImg onClick={() => navigate('/capture/rudolph1')} src={SELECTBUTTON} alt="셀렉트 버튼"/>
         </Flex>
       </Flex>

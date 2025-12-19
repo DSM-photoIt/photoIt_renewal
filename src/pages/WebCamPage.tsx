@@ -16,9 +16,12 @@ import {
 
 type FrameKey = string
 
+const STAGE_WIDTH = 900
+const STAGE_HEIGHT = 567
+const TOTAL_SHOTS = 4
+
 const COUNT_IMAGES = [ONE, TWO, THREE, FOUR]
 const EMPTY_FRAMES = ["", "", "", ""]
-const TOTAL_SHOTS = 4
 
 const videoConstraints = {
   width: { ideal: 1920 },
@@ -66,10 +69,70 @@ export const WebCamPage = () => {
       return
     }
 
-    if (!webcamRef.current) return
+    if (!webcamRef.current?.video) return
 
-    const imageSrc = webcamRef.current.getScreenshot()
-    if (!imageSrc) return
+    const video = webcamRef.current.video
+
+    const canvas = document.createElement("canvas")
+    canvas.width = STAGE_WIDTH
+    canvas.height = STAGE_HEIGHT
+
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
+
+    const videoWidth = video.videoWidth
+    const videoHeight = video.videoHeight
+
+    const stageRatio = STAGE_WIDTH / STAGE_HEIGHT
+    const videoRatio = videoWidth / videoHeight
+
+    let sx = 0
+    let sy = 0
+    let sw = videoWidth
+    let sh = videoHeight
+
+    if (videoRatio > stageRatio) {
+      sw = videoHeight * stageRatio
+      sx = (videoWidth - sw) / 2
+    } else {
+      sh = videoWidth / stageRatio
+      sy = (videoHeight - sh) / 2
+    }
+
+    ctx.save()
+    ctx.translate(STAGE_WIDTH, 0)
+    ctx.scale(-1, 1)
+
+    ctx.drawImage(
+      video,
+      sx,
+      sy,
+      sw,
+      sh,
+      0,
+      0,
+      STAGE_WIDTH,
+      STAGE_HEIGHT
+    )
+
+    ctx.restore()
+
+    const frameSrc = frameArray[shotIndex]
+
+    if (frameSrc) {
+      const frameImg = new Image()
+      frameImg.src = frameSrc
+      frameImg.onload = () => {
+        ctx.drawImage(frameImg, 0, 0, STAGE_WIDTH, STAGE_HEIGHT)
+        saveCanvas(canvas)
+      }
+    } else {
+      saveCanvas(canvas)
+    }
+  }
+
+  const saveCanvas = (canvas: HTMLCanvasElement) => {
+    const imageSrc = canvas.toDataURL("image/png", 1)
 
     setDisplayIndex(shotIndex)
     setIsModal(true)
@@ -102,7 +165,6 @@ export const WebCamPage = () => {
           audio={false}
           videoConstraints={videoConstraints}
           screenshotFormat="image/png"
-          screenshotQuality={1}
           mirrored
           style={{
             width: "100%",
@@ -110,6 +172,7 @@ export const WebCamPage = () => {
             objectFit: "cover",
           }}
         />
+
         {frameArray[shotIndex] && (
           <FrameContent src={frameArray[shotIndex]} />
         )}
@@ -128,6 +191,7 @@ export const WebCamPage = () => {
     </Flex>
   )
 }
+
 
 const Number = styled.img`
   width: 120px;
